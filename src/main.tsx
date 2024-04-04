@@ -1,28 +1,37 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import {Layout} from "./views/components/Layout.tsx";
 import {colors, createTheme, ThemeProvider} from "@mui/material";
-import {purple} from "@mui/material/colors";
-import {App} from "./App.tsx";
+import {pink, purple} from "@mui/material/colors";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {Home} from "./routes/Home.tsx";
+import {Login} from "./routes/Login.tsx";
+import {Layout} from "./views/components/Layout.tsx";
 
 
 const theme = createTheme({
     palette: {
-        primary: {main: purple[800]},
+        primary: {
+            main: purple[800],
+        },
         secondary: {
-            main: colors.yellow[800],
+            main: pink[200],
             contrastText: colors.grey[600]
         }
     },
 })
 
+const router = createBrowserRouter([{path: '', element: <Home/>}, {path: '/login', element: <Login/>}])
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
+
         <ThemeProvider theme={theme}>
+            <RouterProvider router={router}/>
             <Layout>
-                <App/>
+                <Home/>
             </Layout>
         </ThemeProvider>
+
     </React.StrictMode>,
 )

@@ -14,7 +14,7 @@ export default function HorizontalMenu({search, setSearch}: { search: string, se
                     <Box sx={{ml: 4, display: "flex", justifyContent: "flex-start", alignItems: "center "}}>
                         <AcUnitIcon fontSize={'large'}/>
                         <Typography variant={'h4'}>
-                            DAVINE
+                            LoopStore
                         </Typography>
 
                         <Button size={'small'} sx={{color: "white", ml: 5, mr: 2}}>

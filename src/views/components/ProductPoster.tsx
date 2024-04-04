@@ -3,7 +3,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {ProductType} from "../../types/ProductType";
 
 
-export function ProductPoster({title, thumbnail, description}: ProductType) {
+export function ProductPoster({title, thumbnail, description, price}: ProductType) {
     return (
         <Grid item sx={{cursor: "pointer", backgroundColor: "white", pb: 2,}}>
             <Card sx={{width: 270, height: 450}}>
@@ -21,7 +21,7 @@ export function ProductPoster({title, thumbnail, description}: ProductType) {
                     </Typography>
                     <Grid item xs={12} justifyContent={'space-between'} display={'flex'}>
                         <Typography variant={"body1"} color={"primary"}>
-                            R$ 10,30
+                            {'R$ ' + price}
                         </Typography>
                         <FavoriteBorderIcon color={"primary"}/>
                     </Grid>

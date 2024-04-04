@@ -1,18 +1,23 @@
-import {Grid, Typography} from "@mui/material";
+import {Avatar, Grid, Typography} from "@mui/material"
+import {ReactNode} from "react";
 
 interface CategoryPosterProps {
-    image: string
+    id?: number
     name: string
+    children?: ReactNode
 }
 
-export function CategoryPoster({image, name}: CategoryPosterProps) {
+
+export function CategoryPoster({name, children}: CategoryPosterProps) {
 
     return (
-        <Grid item justifyContent={'center'} sx={{mt: 10}}>
+        <Grid item xs={2} justifyContent={'center'}>
             <Grid item>
-                <img style={{objectFit: "cover", borderRadius: 80}} height={120} width={120} src={image}/>
+                <Avatar sx={{bgcolor: 'secondary.main', width: 80, height: 80}}>
+                    {children}
+                </Avatar>
             </Grid>
-            <Typography textAlign={'center'} variant={'body1'} color={"primary.light"} sx={{fontWeight: 'bold'}}>
+            <Typography sx={{mt: 2}} textAlign={'center'} variant={'body1'} color={"primary.main"}>
                 {name}
             </Typography>
         </Grid>

@@ -1,31 +1,35 @@
 import {useEffect, useState} from "react";
 import {Api} from "../services/api.ts";
 
-export function useFetch({url, search}: { url: string, search?: string }) {
+interface useFetchProps {
+    url: string
+    search?: string
+    type: string
+    limit?: number
+}
+
+export function useFetch({url, search, type, limit}: useFetchProps) {
 
     const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
 
-    console.log(search)
     useEffect(() => {
         (async function () {
             const params = {
-                q: search
+                q: search,
+                limit: limit
             }
             try {
-                setLoading(true)
                 const response = await Api.get(url, params)
                 if (response.status === 200) {
-                    setData(response.data?.products)
+                    if (type === 'products') setData(response.data?.products)
+                    else setData(response.data)
                 }
             } catch (error) {
                 console.log(error)
-            } finally {
-                setLoading(false)
             }
         })()
 
     }, [search])
 
-    return {data, loading}
+    return {data}
 }
