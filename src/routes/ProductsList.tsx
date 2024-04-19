@@ -12,20 +12,18 @@ export function ProductsList({search}: { search?: string }) {
         search: search,
         type: 'products',
         limit: 20,
-        skip: page
+        skip: page * 20
     }
     const {data, total} = useFetch(params)
-    // console.log(data)
-
 
     const pagesNumber = () => {
         const number = total / 20
-        return Math.floor(number)
+        return Math.floor(number) - 1   
     }
 
 
     return (
-        <Grid item container spacing={4} justifyContent={'center'} sx={{my: 13}}>
+        <Grid item container spacing={6} justifyContent={'center'} sx={{my: 13}}>
             {data?.length > 0 ?
 
 

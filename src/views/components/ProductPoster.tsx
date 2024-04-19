@@ -1,12 +1,15 @@
 import {Card, CardContent, Grid, Typography} from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {ProductType} from "../../types/ProductType";
+import { useState } from "react";
 
 
 export function ProductPoster({title, thumbnail, description, price}: ProductType) {
+const [ cardHover, setCardHover] = useState('')
+
     return (
         <Grid item sx={{cursor: "pointer", backgroundColor: "white", pb: 2,}}>
-            <Card sx={{width: 270, height: 450}}>
+            <Card sx={{width: 270, height: 450, boxShadow: cardHover || 'none'}} onMouseOver={() => setCardHover('bold')} onMouseOut={() => setCardHover('none')}>
                 <img style={{objectFit: "contain", borderRadius: 5}} width={270} height={280}
                      src={thumbnail}
                      alt={""}/>

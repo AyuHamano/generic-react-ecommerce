@@ -7,11 +7,11 @@ import {ProductsList} from "./routes/ProductsList.tsx";
 
 export function App() {
     const [search, setSearch] = useState('')
-
+    
     return (
         <Grid item xs={12}>
             <HorizontalMenu search={search} setSearch={setSearch}/>
-            {search ?
+            {!!search ?
                 <ProductsList search={search}/> :
                 <Outlet/>}
         </Grid>)

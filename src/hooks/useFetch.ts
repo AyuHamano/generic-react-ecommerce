@@ -5,12 +5,12 @@ import {ProductType} from "../types/ProductType.ts";
 export interface useFetchProps {
     url: string
     search?: string
-    type?: string
+    type: string
     limit?: number
-    skip: number
+    skip?: number    
 }
 
-export function useFetch({url, search, type, limit, skip}: useFetchProps) {
+export function useFetch({url, search, type, limit, skip}: useFetchProps) { 
 
     const [data, setData] = useState<ProductType[]>([])
     const [total, setTotal] = useState(0)
@@ -18,7 +18,8 @@ export function useFetch({url, search, type, limit, skip}: useFetchProps) {
     async function getProductList() {
         const params = {
             q: search,
-            limit: limit
+            limit: limit,   
+            skip: skip
         }
         try {
             const response = await Api.get(url, params)
