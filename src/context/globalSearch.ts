@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 type GlobalSearchType = {
     search: string,
@@ -6,4 +6,7 @@ type GlobalSearchType = {
 
 }
 
-export const GlobalSearch = createContext<GlobalSearchType>
+export const GlobalSearch = createContext<GlobalSearchType>({search: '', setSearch: () => {}})
+
+export const useGlobalContext = () => useContext(GlobalSearch)
+    
