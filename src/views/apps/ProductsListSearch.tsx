@@ -1,9 +1,9 @@
 import {Box, Grid, Pagination, Typography} from "@mui/material";
-import {useFetch, useFetchProps} from "../hooks/useFetch.ts";
-import {ProductPoster} from "../views/components/ProductPoster.tsx";
+import {useFetch, useFetchProps} from "../../hooks/useFetch.ts";
+import {ProductPoster} from "../components/ProductPoster.tsx";
 import {useState} from "react";
 
-export function ProductsList({search}: { search?: string }) {
+function ProductsListSearch({search}: { search?: string }) {
     const url = 'https://dummyjson.com/products' + (search ? '/search' : '')
     const [page, setPage] = useState(1)
 
@@ -12,23 +12,19 @@ export function ProductsList({search}: { search?: string }) {
         search: search,
         type: 'products',
         limit: 20,
-        skip: page * 20
+        skip: !search ? (page - 1) * 20 : 0
     }
     const {data, total} = useFetch(params)
 
     const pagesNumber = () => {
         const number = total / 20
-        return Math.floor(number) - 1   
+        return Math.floor(number)
     }
 
-
     return (
-        <Grid item container spacing={6} justifyContent={'center'} sx={{my: 13}}>
+        <Grid item container spacing={6} justifyContent={'center'} display={'flex'} sx={{my: 13}}>
             {data?.length > 0 ?
-
-
                 (<>
-
                         {data?.map(item =>
 
                             <ProductPoster key={item.id} title={item.title} thumbnail={item.thumbnail}
@@ -36,11 +32,11 @@ export function ProductsList({search}: { search?: string }) {
                                            price={item.price}/>
                         )}
                         <Grid item xs={12} justifyContent={'center'} display={'flex'}>
-                            <Pagination count={pagesNumber()} color={'primary'}
-                                        onChange={(e, value) => {
-                                            setPage(value)
-                                            console.log(e)
-                                        }}/>
+                            {total > 20 && <Pagination count={pagesNumber()} color={"primary"}
+                                                       onChange={(e, value) => {
+                                                           setPage(value)
+                                                           console.log(e)
+                                                       }}/>}
                         </Grid>
                     </>
                 ) :
@@ -49,3 +45,5 @@ export function ProductsList({search}: { search?: string }) {
     )
 
 }
+
+export default ProductsListSearch

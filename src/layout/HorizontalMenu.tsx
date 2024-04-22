@@ -1,6 +1,7 @@
 import {AppBar, Box, Button, Container, InputBase, Toolbar, Typography, useTheme} from "@mui/material";
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import SearchIcon from '@mui/icons-material/Search';
+import {Link} from "react-router-dom";
 
 export default function HorizontalMenu({search, setSearch}: { search: string, setSearch: (search: string) => void }) {
     const theme = useTheme()
@@ -16,11 +17,12 @@ export default function HorizontalMenu({search, setSearch}: { search: string, se
                         <Typography variant={'h4'}>
                             LoopStore
                         </Typography>
-
-                        <Button size={'small'} sx={{color: "white", ml: 5, mr: 2}}>
-                            PRODUCTS
-                        </Button>
-                        <Button size={'small'} sx={{color: "white"}}>
+                        <Link to={'/product-list'}>
+                            <Button size={'small'} sx={{color: "white", ml: 5, mr: 2}}>
+                                PRODUCTS
+                            </Button>
+                        </Link>
+                        <Button size={"small"} sx={{color: "white"}}>
                             CATEGORIES
                         </Button>
                     </Box>
