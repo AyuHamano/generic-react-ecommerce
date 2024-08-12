@@ -22,7 +22,7 @@ function ProductsListSearch({search}: { search?: string }) {
     }
 
     return (
-        <Grid item container spacing={6} justifyContent={'center'} display={'flex'} sx={{my: 13}}>
+        <Grid item container spacing={6} justifyContent={'center'} display={'flex'} sx={{my: 8}}>
             {data?.length > 0 ?
                 (<>
                         {data?.map(item =>
@@ -40,10 +40,9 @@ function ProductsListSearch({search}: { search?: string }) {
                         </Grid>
                     </>
                 ) :
-                <Box><Typography>There's no items to show</Typography></Box>}
+                <Box sx={{my: 10}}><Typography>There's no items to show</Typography></Box>}
         </Grid>
     )
-
 }
 
 export default ProductsListSearch

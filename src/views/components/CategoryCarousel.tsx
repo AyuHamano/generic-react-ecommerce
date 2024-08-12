@@ -1,5 +1,4 @@
 import Carousel from "react-multi-carousel";
-import * as React from "react";
 
 export function CategoryCarousel() {
 

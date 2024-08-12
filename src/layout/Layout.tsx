@@ -1,7 +1,6 @@
 import {Grid} from "@mui/material";
 import HorizontalMenu from "./HorizontalMenu.tsx";
 import ProductsListSearch from "../views/apps/ProductsListSearch.tsx";
-import * as React from "react";
 import {useState} from "react";
 import {Outlet} from "react-router";
 
