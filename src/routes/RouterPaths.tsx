@@ -8,7 +8,7 @@ const routerPaths = createBrowserRouter([
         element: <Layout/>,
         children: [
             {
-                path: 'generic-react-ecommerce', element: <Home/>
+                path: 'generic-react-ecommerce/', element: <Home/>
             }
             , {
                 path: 'generic-react-ecommerce/login', element: <Login/>
