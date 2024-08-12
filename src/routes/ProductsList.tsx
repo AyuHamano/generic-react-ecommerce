@@ -1,7 +1,8 @@
 import {Box, Grid, Pagination, Typography} from "@mui/material";
-import {useFetch, useFetchProps} from "../../hooks/useFetch.ts";
-import {ProductPoster} from "../components/ProductPoster.tsx";
+
 import {useState} from "react";
+import {useFetch, useFetchProps} from "../hooks/useFetch.ts";
+import {ProductPoster} from "../views/components/ProductPoster.tsx";
 
 function ProductsListSearch({search}: { search?: string }) {
     const url = 'https://dummyjson.com/products' + (search ? '/search' : '')

@@ -1,8 +1,8 @@
 import {Grid} from "@mui/material";
-import HorizontalMenu from "./HorizontalMenu.tsx";
-import ProductsListSearch from "../views/apps/ProductsListSearch.tsx";
 import {useState} from "react";
 import {Outlet} from "react-router";
+import HorizontalMenu from "../views/HorizontalMenu.tsx";
+import ProductsListSearch from "../routes/ProductsList.tsx";
 
 function Layout() {
     const [search, setSearch] = useState('')

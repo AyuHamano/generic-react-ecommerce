@@ -1,5 +1,5 @@
 import {Grid} from "@mui/material";
-import ProductsListSearch from "../ProductsListSearch.tsx";
+import ProductsListSearch from "../../../routes/ProductsList.tsx";
 
 const Home = () => {
 

@@ -1,5 +1,12 @@
-import {createContext, useContext} from "react";
+import { createContext, useContext } from "react";
 
-export const GlobalSearch = createContext('')
+type GlobalSearchType = {
+    search: string,
+    setSearch: (s: string) => void
+
+}
+
+export const GlobalSearch = createContext<GlobalSearchType>({search: '', setSearch: () => {}})
 
 export const useGlobalContext = () => useContext(GlobalSearch)
+    
