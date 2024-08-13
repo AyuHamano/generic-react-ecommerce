@@ -1,12 +1,15 @@
 import {Box, Grid, Pagination, Typography} from "@mui/material";
 
 import {useState} from "react";
-import {useFetch, useFetchProps} from "../hooks/useFetch.ts";
-import {ProductPoster} from "../views/components/ProductPoster.tsx";
+import {useFetchList, useFetchProps} from "../../../hooks/useFetchList.ts";
+import {ProductPoster} from "./ProductPoster.tsx";
+import {ProductType} from "../../../types/ProductType.ts";
+import {useNavigate} from "react-router-dom";
 
 function ProductsListSearch({search}: { search?: string }) {
     const url = 'https://dummyjson.com/products' + (search ? '/search' : '')
     const [page, setPage] = useState(1)
+    const navigate = useNavigate()
 
     const params: useFetchProps = {
         url: url,
@@ -15,22 +18,24 @@ function ProductsListSearch({search}: { search?: string }) {
         limit: 20,
         skip: !search ? (page - 1) * 20 : 0
     }
-    const {data, total} = useFetch(params)
+    const {data, total} = useFetchList<ProductType>(params)
 
     const pagesNumber = () => {
         const number = total / 20
         return Math.floor(number)
     }
 
+    const goTo = (id: number | undefined) => {
+        navigate(`/generic-react-ecommerce/products/${id}`)
+    }
+
     return (
-        <Grid item container spacing={6} justifyContent={'center'} display={'flex'} sx={{my: 8}}>
+        <Grid item container spacing={4} justifyContent={'center'} display={'flex'} sx={{my: 15}}>
             {data?.length > 0 ?
                 (<>
                         {data?.map(item =>
 
-                            <ProductPoster key={item.id} title={item.title} thumbnail={item.thumbnail}
-                                           description={item.description}
-                                           price={item.price}/>
+                            <ProductPoster key={item.id} product={item} onClick={goTo}/>
                         )}
                         <Grid item xs={12} justifyContent={'center'} display={'flex'}>
                             {total > 20 && <Pagination count={pagesNumber()} color={"primary"}

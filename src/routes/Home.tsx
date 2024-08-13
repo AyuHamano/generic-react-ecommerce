@@ -1,5 +1,5 @@
 import {Grid} from "@mui/material";
-import ProductsList from "./ProductsList.tsx";
+import ProductsList from "../views/apps/product/ProductsList.tsx";
 
 export function Home() {
 
@@ -7,5 +7,5 @@ export function Home() {
         <Grid item xs={12}>
             <ProductsList/>
         </Grid>
-        )
+    )
 }

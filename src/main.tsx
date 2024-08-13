@@ -1,18 +1,21 @@
 import {createRoot} from "react-dom/client";
 import {RouterProvider} from "react-router-dom";
-import {colors, createTheme, ThemeProvider} from "@mui/material";
-import {pink, purple} from "@mui/material/colors";
+import {createTheme, ThemeProvider} from "@mui/material";
 import routerPaths from "./routes/RouterPaths.tsx";
+import {grey} from "@mui/material/colors";
 
 
 const theme = createTheme({
     palette: {
         primary: {
-            main: purple[800],
+            main: '#527853',
+            light: '#9CA986',
+            dark: '#5F6F65'
         },
         secondary: {
-            main: pink[200],
-            contrastText: colors.grey[600]
+            light: '#AF8F6F',
+            main: '#FFBF00',
+            contrastText: grey[500]
         }
     },
 })
