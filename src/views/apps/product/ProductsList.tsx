@@ -2,12 +2,14 @@ import {Box, Grid, Pagination, Typography} from "@mui/material";
 
 import {useState} from "react";
 import {useFetchList, useFetchProps} from "../../../hooks/useFetchList.ts";
-import {ProductPoster} from "./ProductPoster.tsx";
+import {ProductPoster} from "./components/ProductPoster.tsx";
 import {ProductType} from "../../../types/ProductType.ts";
 import {useNavigate} from "react-router-dom";
+import {getCategoryProducts, getProductsSearch} from "../../../services/apiUrls.ts";
 
-function ProductsListSearch({search}: { search?: string }) {
-    const url = 'https://dummyjson.com/products' + (search ? '/search' : '')
+function ProductsListSearch({search, category}: { search?: string, category?: string }) {
+    const url = category ? getCategoryProducts(category) : getProductsSearch()
+
     const [page, setPage] = useState(1)
     const navigate = useNavigate()
 
@@ -16,7 +18,8 @@ function ProductsListSearch({search}: { search?: string }) {
         search: search,
         type: 'products',
         limit: 20,
-        skip: !search ? (page - 1) * 20 : 0
+        skip: !search ? (page - 1) * 20 : 0,
+        category: category
     }
     const {data, total} = useFetchList<ProductType>(params)
 

@@ -8,13 +8,12 @@ import {grey} from "@mui/material/colors";
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#527853',
-            light: '#9CA986',
-            dark: '#5F6F65'
+            main: '#21094E',
+            light: '#511281',
         },
         secondary: {
-            light: '#AF8F6F',
-            main: '#FFBF00',
+            light: '#A5E1AD',
+            main: '#511281',
             contrastText: grey[500]
         }
     },

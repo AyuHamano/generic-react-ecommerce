@@ -1,6 +1,6 @@
 import {Button, Card, CardContent, Grid, Rating, Typography} from "@mui/material";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import {ProductType} from "../../../types/ProductType.ts";
+import {ProductType} from "../../../../types/ProductType.ts";
 
 
 export function ProductPoster({product, onClick}: {
@@ -28,6 +28,7 @@ export function ProductPoster({product, onClick}: {
                     <Typography variant={"body1"} color={"primary"}>
                         {'R$ ' + product.price}
                     </Typography>
+                    <Typography color={'error'}>- {product?.discountPercentage}%</Typography>
                     <Button size={'small'} variant={'contained'} sx={{backgroundColor: 'secondary.main'}}>
                         {/*Adicionar ao Carrinho*/}
                         <AddShoppingCartIcon/>

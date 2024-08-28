@@ -1,5 +1,13 @@
-const BASEURL = 'https://dummyjson.com/'
+export const BASEURL = 'https://dummyjson.com/products'
 
 export const getProductById = (id: string | undefined) => {
-    return BASEURL + 'products/' + id
+    return BASEURL + '/' + id
+}
+
+export const getCategoryProducts = (category: string) => {
+    return BASEURL + '/category/' + category
+}
+
+export const getProductsSearch = () => {
+    return BASEURL + '/search'
 }

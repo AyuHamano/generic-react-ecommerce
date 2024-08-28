@@ -1,25 +1,33 @@
-import {Card, CardContent, Rating, Typography} from "@mui/material";
+import {Card, CardContent, Grid, Rating, Typography} from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import moment from 'moment';
 
 export interface UserReviewProps {
     reviewerName: string;
     comment: string
     rating: number
     date: string
+    isMobile?: boolean
 }
 
-export function UserReview({reviewerName, comment, date, rating}: UserReviewProps) {
+export function UserReview({reviewerName, comment, date, rating, isMobile}: UserReviewProps) {
+
+    const toIsoDate = (date: string) => moment(date).format('DD/MM/YYYY');
 
     return (
         <Card sx={{my: 3}}>
             <CardContent>
-                <AccountCircleIcon/>
-                <Typography>{reviewerName}</Typography>
-                <Rating readOnly value={rating}></Rating>
-                <Typography>{date}</Typography>
+                <Grid item display={'flex'} alignItems={'center'} flexDirection={isMobile ? 'column' : 'row'}
+                      justifyContent={isMobile ? 'center' : 'flex-start'}>
+                    <AccountCircleIcon/>
+                    <Typography sx={{mx: 2}}>{reviewerName}</Typography>
+                    <Rating readOnly value={rating}></Rating>
+                </Grid>
+
+
+                <Typography variant={'subtitle2'} sx={{mt: 2}}>{toIsoDate(date)}</Typography>
                 <Typography>{comment}</Typography>
             </CardContent>
-
         </Card>
     )
 }
