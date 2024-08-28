@@ -19,7 +19,6 @@ function ProductsListSearch({search, category}: { search?: string, category?: st
         type: 'products',
         limit: 20,
         skip: !search ? (page - 1) * 20 : 0,
-        category: category
     }
     const {data, total} = useFetchList<ProductType>(params)
 
