@@ -25,7 +25,6 @@ export function useFetchList<T>({url, search, type, limit, skip}: useFetchProps)
             skip: skip
         }
 
-        console.log(searchRef)
         try {
             const response = await Api.get(url, params)
             if (response.status === 200) {
