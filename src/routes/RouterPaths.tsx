@@ -1,9 +1,9 @@
 import {createBrowserRouter} from "react-router-dom";
-import Home from "../views/apps/home/Home.tsx";
+import Home from "../pages/home/Home.tsx";
 import Layout from "../layout/Layout.tsx";
-import {Login} from "./Login.tsx";
-import {ProductView} from "../views/apps/product/ProductView.tsx";
-import {CartView} from "../views/apps/cart/CartView.tsx";
+import {Login} from "../pages/Login.tsx";
+import {ProductView} from "../pages/product/ProductView.tsx";
+import {CartView} from "../pages/cart/CartView.tsx";
 
 const routerPaths = createBrowserRouter([
     {

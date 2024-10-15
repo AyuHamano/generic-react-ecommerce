@@ -3,6 +3,8 @@ import {RouterProvider} from "react-router-dom";
 import {createTheme, ThemeProvider} from "@mui/material";
 import routerPaths from "./routes/RouterPaths.tsx";
 import {grey} from "@mui/material/colors";
+import {store} from "./redux/store.ts";
+import {Provider} from "react-redux";
 
 
 const theme = createTheme({
@@ -20,7 +22,9 @@ const theme = createTheme({
 })
 
 createRoot(document.getElementById('root')!).render(
+    <Provider store={store}>
     <ThemeProvider theme={theme}>
         <RouterProvider router={routerPaths}/>
     </ThemeProvider>
+    </Provider>
 )

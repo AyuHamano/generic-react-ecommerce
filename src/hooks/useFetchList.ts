@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {Api} from "../services/api.ts";
+import {useSelector} from "react-redux";
 
 export interface useFetchProps {
     url: string
@@ -14,12 +15,17 @@ export function useFetchList<T>({url, search, type, limit, skip}: useFetchProps)
     const [data, setData] = useState<T[]>([])
     const [total, setTotal] = useState(0)
 
+    const searchRef = useSelector(state => state.search.query)
+
+
     async function getProductList() {
         const params = {
-            q: search,
+            q: searchRef,
             limit: limit,
             skip: skip
         }
+
+        console.log(searchRef)
         try {
             const response = await Api.get(url, params)
             if (response.status === 200) {
@@ -38,7 +44,7 @@ export function useFetchList<T>({url, search, type, limit, skip}: useFetchProps)
     useEffect(() => {
         getProductList().then()
 
-    }, [search, skip])
+    }, [searchRef, skip])
 
     return {data, total}
 }

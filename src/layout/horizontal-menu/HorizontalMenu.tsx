@@ -5,9 +5,13 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CategoriesHorizontalMenu from "./CategoriesHorizontalMenu.tsx";
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {setSearchQuery} from "../../redux/slices/searchSlice.ts";
 
-export default function HorizontalMenu({search, setSearch}: { search: string, setSearch: (search: string) => void }) {
+export default function HorizontalMenu() {
     const theme = useTheme()
+    const dispatch = useDispatch();
+    const items = useSelector((state) => state.cart.items)
 
     const isMiddle = useMediaQuery(theme.breakpoints.down("md"))
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
@@ -21,6 +25,13 @@ export default function HorizontalMenu({search, setSearch}: { search: string, se
         navigation(`/generic-react-ecommerce/cart`)
     }
 
+    const searchRef = useSelector(state => state.search.query)
+
+    const handleSearch = (event) => {
+        const query = event.target.value;
+        dispatch(setSearchQuery(query));
+    };
+
     return (
         <AppBar sx={{
             backgroundColor: theme.palette.primary.main,
@@ -30,14 +41,15 @@ export default function HorizontalMenu({search, setSearch}: { search: string, se
                 <Box
                     sx={{ml: 4, display: "flex", justifyContent: "flex-start", alignItems: "center", cursor: 'pointer'}}
                     onClick={() => goTo()}>
-                    <AcUnitIcon fontSize={'large'}/>
-                    {!isMobile && <Typography variant={'h4'}>
+                    <AcUnitIcon fontSize='large'/>
+                    {!isMobile && <Typography variant='h4'>
                         LoopStore
                     </Typography>}
                 </Box>
                 <Box sx={{display: "flex", alignItems: "center"}}>
 
                     <InputBase
+
                         style={{
                             minWidth: isMiddle ? 250 : 500,
                             borderRadius: 5,
@@ -46,13 +58,13 @@ export default function HorizontalMenu({search, setSearch}: { search: string, se
                             marginInline: 4
                         }}
                         placeholder={"Search by title..."}
-                        value={search}
-                        onChange={event => setSearch(event.target.value)}
-                        startAdornment={<SearchIcon fontSize={"small"} sx={{marginInline: 1}}/>}/>
+                        value={searchRef}
+                        onChange={handleSearch}
+                        startAdornment={<SearchIcon fontSize="small" sx={{marginInline: 1}}/>}/>
                 </Box>
 
                 <Box sx={{display: "flex", alignItems: "center", gap: 2}}>
-                    <Badge badgeContent={17} color="error">
+                    <Badge badgeContent={items.length} color="error">
                         <ShoppingCartIcon onClick={() => goToCart()} fontSize="large" style={{cursor: 'pointer'}}/>
                     </Badge>
                     <AccountCircleIcon fontSize="large"/>

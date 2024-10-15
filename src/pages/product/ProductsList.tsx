@@ -1,24 +1,28 @@
 import {Box, Grid, Pagination, Typography} from "@mui/material";
 
 import {useState} from "react";
-import {useFetchList, useFetchProps} from "../../../hooks/useFetchList.ts";
+import {useFetchList, useFetchProps} from "../../hooks/useFetchList.ts";
 import {ProductPoster} from "./components/ProductPoster.tsx";
-import {ProductType} from "../../../types/ProductType.ts";
+import {ProductType} from "../../types/ProductType.ts";
 import {useNavigate} from "react-router-dom";
-import {getCategoryProducts, getProductsSearch} from "../../../services/apiUrls.ts";
+import {getCategoryProducts, getProductsSearch} from "../../services/apiUrls.ts";
+import {useSelector} from "react-redux";
 
-function ProductsListSearch({search, category}: { search?: string, category?: string }) {
+function ProductsListSearch({ category}: { category?: string }) {
     const url = category ? getCategoryProducts(category) : getProductsSearch()
 
     const [page, setPage] = useState(1)
     const navigate = useNavigate()
 
+    const searchRef = useSelector(state => state.search.query)
+
+
     const params: useFetchProps = {
         url: url,
-        search: search,
+        search: searchRef,
         type: 'products',
         limit: 20,
-        skip: !search ? (page - 1) * 20 : 0,
+        skip: !searchRef ? (page - 1) * 20 : 0,
     }
     const {data, total} = useFetchList<ProductType>(params)
 
@@ -37,10 +41,10 @@ function ProductsListSearch({search, category}: { search?: string, category?: st
                 (<>
                         {data?.map(item =>
 
-                            <ProductPoster key={item.id} product={item} onClick={goTo}/>
+                            <ProductPoster product={item} onClick={goTo}/>
                         )}
                         <Grid item xs={12} justifyContent={'center'} display={'flex'}>
-                            {total > 20 && <Pagination count={pagesNumber()} color={"primary"}
+                            {total > 20 && <Pagination count={pagesNumber()} color="primary"
                                                        onChange={(e, value) => {
                                                            setPage(value)
                                                            console.log(e)
