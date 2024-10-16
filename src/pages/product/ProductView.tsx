@@ -17,14 +17,15 @@ import {useParams} from "react-router-dom";
 import {UserReview} from "./components/UserReview.tsx";
 import {useDispatch} from "react-redux";
 import {addToCart} from "../../redux/slices/cartSlice.ts";
+import {useState} from "react";
 
 export function ProductView() {
+
+    const [quantity, setQuantity] = useState(1);
 
     const {id} = useParams()
 
     const dispatch = useDispatch();
-
-
 
     const url = getProductById(id)
 
@@ -35,7 +36,11 @@ export function ProductView() {
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
     const handleAddShoppingCart = () => {
-        dispatch(addToCart({id: data?.id, name: data?.title, price: data?.price, quantity: 1}))
+        dispatch(addToCart({id: data?.id, name: data?.title, price: data?.price, quantity: quantity ?? 1}))
+    }
+
+    const handleSelectChange = (e) => {
+        setQuantity(e.target.value)
     }
 
 
@@ -49,10 +54,11 @@ export function ProductView() {
             flexDirection: isMobile ? 'column' : 'row',
             alignItems: 'center'
         }}>
+
             <Grid item xs={8} display={'flex'} justifyContent={'center'}>
                 <img src={data?.thumbnail} width={350} height={400} style={{objectFit: 'cover'}}/>
             </Grid>
-            <Grid item xs={10} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
+            <Grid item xs={10} display={'flex'} flexDirection='column' justifyContent={'center'}>
                 <Grid sx={{my: 2}}>
                     <Typography variant="h5">
                         {data?.title}
@@ -67,19 +73,19 @@ export function ProductView() {
                     <Rating name="read-only" value={data?.rating ?? 0} readOnly/>
                 </Grid>
 
-                <Typography variant={'subtitle2'}>
+                <Typography variant='subtitle2'>
                     {data?.reviews?.length + ' users reviews'}
                 </Typography>
 
                 <Grid sx={{mt: 2}} display={'flex'} alignItems={'center'}>
-                    <Typography variant={'h5'} sx={{mr: 3}}>$ {data?.price}</Typography>
+                    <Typography variant='h5' sx={{mr: 3}}>$ {data?.price}</Typography>
                     <Typography color={'error'}>- {data?.discountPercentage}%</Typography>
                 </Grid>
 
 
                 <Grid sx={{mb: 2}} display={'flex'} alignItems={'center'}>
-                    <Typography variant={'subtitle2'} sx={{mr: 1}}>Quantity:</Typography>
-                    <Select size={'small'} value={''}>
+                    <Typography variant='subtitle2' sx={{mr: 1}}>Quantity:</Typography>
+                    <Select onChange={handleSelectChange}  size={'small'} value={quantity}>
                         <MenuItem value={1}>1</MenuItem>
                         <MenuItem value={2}>2</MenuItem>
                         <MenuItem value={3}>3</MenuItem>
@@ -90,15 +96,12 @@ export function ProductView() {
                     <Button onClick={handleAddShoppingCart} style={{borderRadius: 20}} variant={'contained'}>Add to
                         basket</Button>
                 </Grid>
-
             </Grid>
-
-
         </Container>
 
         <Container>
 
-            <Divider sx={{my: 2}} color={'inherit'}/>
+            <Divider sx={{my: 2}}/>
 
             <Grid item xs={12} display={'flex'} justifyContent={'space-around'}
                   flexDirection={isMobile ? 'column' : 'row'} sx={{mx: 10}}>

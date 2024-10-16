@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {ProductType} from "../../types/ProductType.ts";
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        items: [],
+        items: <ProductType>[],
+        totalValue: 0,
+        totalDiscount: 0
     },
     reducers: {
         addToCart(state, action) {
@@ -13,7 +16,10 @@ const cartSlice = createSlice({
             } else {
                 state.items.push({ ...action.payload, quantity: 1 });
             }
-            },
+
+            state.totalValue += action.payload.price;
+            state.totalDiscount += action.payload.discountPercentage;
+        },
         removeFromCart(state, action) {
             state.items = state.items.filter(item => item.id !== action.payload);
         },

@@ -6,20 +6,16 @@ import ProductsListSearch from "../pages/product/ProductsList.tsx";
 import {useSelector} from "react-redux";
 
 function Layout() {
-    const [search, setSearch] = useState('')
-
-    const searchRef = useSelector(state => state.search);
+    const searchRef = useSelector(state => state.search.query);
 
     return (
         <Grid item xs={12}>
             <HorizontalMenu/>
-
             <main>
                 {searchRef ?
                     <ProductsListSearch/>
                     : <Outlet/>
                 }
-
             </main>
         </Grid>
     )

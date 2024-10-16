@@ -14,7 +14,6 @@ const theme = createTheme({
             light: '#511281',
         },
         secondary: {
-            light: '#A5E1AD',
             main: '#511281',
             contrastText: grey[500]
         }
@@ -22,9 +21,9 @@ const theme = createTheme({
 })
 
 createRoot(document.getElementById('root')!).render(
-    <Provider store={store}>
     <ThemeProvider theme={theme}>
-        <RouterProvider router={routerPaths}/>
+        <Provider store={store}>
+            <RouterProvider router={routerPaths}/>
+        </Provider>
     </ThemeProvider>
-    </Provider>
 )

@@ -12,7 +12,6 @@ function ProductsListSearch({ category}: { category?: string }) {
     const url = category ? getCategoryProducts(category) : getProductsSearch()
 
     const [page, setPage] = useState(1)
-    const navigate = useNavigate()
 
     const searchRef = useSelector(state => state.search.query)
 
@@ -31,17 +30,13 @@ function ProductsListSearch({ category}: { category?: string }) {
         return Math.floor(number)
     }
 
-    const goTo = (id: number | undefined) => {
-        navigate(`/generic-react-ecommerce/products/${id}`)
-    }
-
     return (
-        <Grid item container spacing={4} justifyContent={'center'} display={'flex'} sx={{my: 15}}>
+        <Grid item container spacing={1} justifyContent={'center'} display={'flex'} sx={{my: 15, height: '100%'}}>
             {data?.length > 0 ?
                 (<>
                         {data?.map(item =>
 
-                            <ProductPoster product={item} onClick={goTo}/>
+                            <ProductPoster product={item}/>
                         )}
                         <Grid item xs={12} justifyContent={'center'} display={'flex'}>
                             {total > 20 && <Pagination count={pagesNumber()} color="primary"
@@ -52,7 +47,7 @@ function ProductsListSearch({ category}: { category?: string }) {
                         </Grid>
                     </>
                 ) :
-                <Box sx={{my: 10}}><Typography>There's no items to show</Typography></Box>}
+                <Grid item xs={12} justifyContent={'center'} display={'flex'} sx={{my: 10}}><Typography>There's no items to show</Typography></Grid>   }
         </Grid>
     )
 }

@@ -3,11 +3,11 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {ProductType} from "../../../types/ProductType.ts";
 import {useDispatch} from "react-redux";
 import {addToCart} from "../../../redux/slices/cartSlice.ts";
+import {Link} from "react-router-dom";
 
 
-export function ProductPoster({product, onClick}: {
-    product: ProductType, onClick:
-        (id: number | undefined) => void
+export function ProductPoster({product}: {
+    product: ProductType,
 }) {
 
     const dispatch = useDispatch();
@@ -19,9 +19,11 @@ export function ProductPoster({product, onClick}: {
     return (
         <Card sx={{width: 300, cursor: "pointer", height: 480, boxShadow: 'bold', m: 5}}
              >
-            <img  onClick={() => onClick(product?.id)} style={{objectFit: "contain", borderRadius: 5}} width={270} height={280}
+            <Link to={`/generic-react-ecommerce/products/${product.id}`}>
+            <img   style={{objectFit: "contain", borderRadius: 5}} width={270} height={280}
                  src={product.thumbnail}
                  alt={""}/>
+            </Link>
             <CardContent>
                 <Typography height={45} variant="body1" sx={{color: "primary"}}>
                     {product.title}
